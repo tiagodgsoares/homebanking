@@ -28,11 +28,12 @@ function createAccount(userEmail) {
     const account = {
         id: v4(),
         balance: 0,
-        userEmail
+        userEmail,
+        movements: []
     }
 
     Accounts.push(account);
-    utils.saveJSONFile('account.json', JSON.stringify(Accounts));
+    utils.saveJSONFile('account.json', JSON.stringify(Accounts)); // variable for .json
 
 }
 

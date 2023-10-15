@@ -1,1 +1,39 @@
-[{"id":"c8a763cb-d2d5-4549-8092-967dff5c1c96","balance":0,"userEmail":"sofia"}]
+[
+    {
+        "id": "c8a763cb-d2d5-4549-8092-967dff5c1c96",
+        "balance": 0,
+        "userEmail": "sofia",
+        "movements": [
+            {
+                "balance": 100,
+                "ammount": 100,
+                "date": "2023-10-15T17:42:34.722Z"
+            },
+            {
+                "balance": 200,
+                "ammount": 100,
+                "date": "2023-10-15T17:42:38.229Z"
+            },
+            {
+                "balance": 300,
+                "ammount": 100,
+                "date": "2023-10-15T17:42:41.112Z"
+            },
+            {
+                "balance": 200,
+                "ammount": 100,
+                "date": "2023-10-15T17:42:53.337Z"
+            },
+            {
+                "balance": 100,
+                "ammount": 100,
+                "date": "2023-10-15T17:42:54.451Z"
+            },
+            {
+                "balance": 0,
+                "ammount": 100,
+                "date": "2023-10-15T17:42:55.411Z"
+            }
+        ]
+    }
+]

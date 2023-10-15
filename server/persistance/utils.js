@@ -13,7 +13,6 @@ const MODEL_PATH = '/server/model/'
  * @param {object} data 
  */
 function saveJSONFile(filePath, data) {
-    console.log(path.resolve(`./server/model/${filePath}`));
 
     return fs.writeFile(path.resolve(`./server/model/${filePath}`), data, (err) => {
         if (err) throw err;

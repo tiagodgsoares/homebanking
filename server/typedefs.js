@@ -3,9 +3,20 @@
  *
  * @typedef {Object} Account
  *
- * @property {uuid}     id          - Indicates whether the Courage component is present.
- * @property {string}   userEmail   - The user which this account belongs too.
- * @property {number}   balance     - The account current balance .
+ * @property {uuid}         id          - Indicates whether the Courage component is present.
+ * @property {string}       userEmail   - The user which this account belongs too.
+ * @property {number}       balance     - The account current balance.
+ * @property {Movement[]}   movements   - The account movements list.
+ */
+
+/**
+ * The representation of an user Movement.
+ *
+ * @typedef {Object} Movement
+ *
+ * @property {number}   balance     - The current balance.
+ * @property {number}   ammount     - The movement ammount
+ * @property {Date}     date        - The movement date.
  */
 
  /**

@@ -9,30 +9,70 @@ export default {
 /**
  * Get Balance
  */
-function getBalance(id) {
-    return Account.getAccount(id).balance;
+function getBalance(request, h) {
+    console.log(request.payload)
+
+    const result = Account.getAccount(request.params.id);
+
+    return h.response(result).code(200);
 }
 
 /**
  * Add Ammount
  */
-function addAmmount(value, id) {
+function addAmmount(request, h) {
 
-    const account = Account.getAccount(id);
-    account.balance += value;
+    const { payload } = request;
+    const { params } = request;
 
+    console.log(params)
+    const account = Account.getAccount(params.id);
+    account.balance += payload.ammount;
+    console.log(payload.ammount)
+
+    /** @type {Movement} */
+    const movement = {
+        balance: account.balance,
+        ammount: payload.ammount,
+        date: new Date(),
+    }
+
+    account.movements.push(movement);
+
+    console.log(account)
     Account.updateAccount(account);
-    console.log(account);
+
+    return h.response(account).code(200);
 }
 
 /**
  * Remove Ammount
- */
-function removeAmmount(value, id) {
+*/
+function removeAmmount(request, h) {
 
-    const account = Account.getAccount(id);
-    //TODO verify balance
-    account.balance -= value;
+    const { payload } = request;
+    const { params } = request;
 
-    Account.updateAccount(account);
+    const account = Account.getAccount(params.id);
+
+    if (account.balance >= payload.ammount) {
+
+        account.balance -= payload.ammount;
+
+        /** @type {Movement} */
+        const movement = {
+            balance: account.balance,
+            ammount: payload.ammount,
+            date: new Date(),
+        }
+
+        account.movements.push(movement);
+
+        Account.updateAccount(account);
+        console.log(account);
+
+        return h.response(account).code(200);
+    }
+
+    return h.response({ message: 'Insufficient funds.' }).code(400);
 }

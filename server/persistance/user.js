@@ -33,5 +33,5 @@ function updateUser(user) {
 }
 
 function save(users) {
-    utils.saveJSONFile('../model/user.json', users);
+    utils.saveJSONFile('user.json', users);
 }
