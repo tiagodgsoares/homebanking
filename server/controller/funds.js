@@ -2,8 +2,8 @@ import Account from '../persistance/account.js';
 
 export default {
     getBalance,
-    addAmmount,
-    removeAmmount
+    addAmount: addAmount,
+    removeAmount: removeAmount
 }
 
 /**
@@ -18,23 +18,24 @@ function getBalance(request, h) {
 }
 
 /**
- * Add Ammount
+ * Add Amount
  */
-function addAmmount(request, h) {
-
+function addAmount(request, h) {
+    
     const { payload } = request;
     const { params } = request;
 
     console.log(params)
     const account = Account.getAccount(params.id);
-    account.balance += payload.ammount;
-    console.log(payload.ammount)
+    account.balance += payload.amount;
+    console.log(payload.amount)
 
     /** @type {Movement} */
     const movement = {
         balance: account.balance,
-        ammount: payload.ammount,
+        amount: payload.amount,
         date: new Date(),
+        //add credit property
     }
 
     account.movements.push(movement);
@@ -46,24 +47,25 @@ function addAmmount(request, h) {
 }
 
 /**
- * Remove Ammount
+ * Remove Amount
 */
-function removeAmmount(request, h) {
+function removeAmount(request, h) {
 
     const { payload } = request;
     const { params } = request;
 
     const account = Account.getAccount(params.id);
 
-    if (account.balance >= payload.ammount) {
+    if (account.balance >= payload.amount) {
 
-        account.balance -= payload.ammount;
+        account.balance -= payload.amount;
 
         /** @type {Movement} */
         const movement = {
             balance: account.balance,
-            ammount: payload.ammount,
+            amount: payload.amount,
             date: new Date(),
+            //add debit property
         }
 
         account.movements.push(movement);

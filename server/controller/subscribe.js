@@ -17,9 +17,9 @@ function register(user) {
     if (foundUser) {
         return 'user already exists';
     }
-
+    
+    Account.createAccount(user.email);
     User.createUser(user);
 
-    Account.createAccount(user.email);
-    
+    return user;
 }

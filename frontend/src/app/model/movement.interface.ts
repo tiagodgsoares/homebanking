@@ -1,5 +1,5 @@
 export interface Movement {
     balance: number,
-    ammount: number,
+    amount: number,
     date: Date,
 }

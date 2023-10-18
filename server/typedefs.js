@@ -15,7 +15,7 @@
  * @typedef {Object} Movement
  *
  * @property {number}   balance     - The current balance.
- * @property {number}   ammount     - The movement ammount
+ * @property {number}   amount     - The movement amount
  * @property {Date}     date        - The movement date.
  */
 

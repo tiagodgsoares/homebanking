@@ -9,11 +9,18 @@ import { SERVER_ENDPOINTS } from '../constants';
 })
 export class AccountService {
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) { }
 
   getAccount(id: string): Observable<Account> {
     return this.http.get<Account>(`${SERVER_ENDPOINTS.ACCOUNT}/${id}`);
   }
+
+  addAmount(id: string, amount: number): Observable<Account> {
+    return this.http.put<Account>(`${SERVER_ENDPOINTS.ACCOUNT}/${id}/add`, { amount } )
+  }
+
+  removeAmount(id: string, amount: number): Observable<Account> {
+    return this.http.put<Account>(`${SERVER_ENDPOINTS.ACCOUNT}/${id}/remove`, { amount } )
+  }
+
 }

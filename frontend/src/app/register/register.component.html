@@ -1,0 +1,25 @@
+<form class="register-form" [formGroup]="userFormGroup">
+    <mat-form-field class="register-full-width">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="emailCtrl" placeholder="Ex. pat@example.com">
+        <mat-error
+            *ngIf="userFormGroup.controls.emailCtrl.hasError('email') && !userFormGroup.controls.emailCtrl.hasError('required')">
+            Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="userFormGroup.controls.emailCtrl.hasError('required')">
+            Email is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="register-full-width">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="passwordCtrl">
+        <mat-error
+            *ngIf="userFormGroup.controls.passwordCtrl.hasError('maxLength') && !userFormGroup.controls.passwordCtrl.hasError('required')">
+            Please enter a valid password (max. 10 characters)
+        </mat-error>
+        <mat-error *ngIf="userFormGroup.controls.passwordCtrl.hasError('required')">
+            Password is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <button mat-raised-button (click)="handleSubmit()">Create Account</button>
+</form>

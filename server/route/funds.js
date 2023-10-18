@@ -2,7 +2,8 @@
  * Funds routes.
  */
 
-import funds from "../controller/funds.js";
+import funds from '../controller/funds.js';
+import Joi from 'joi';
 const path = '/funds';
 
 export default [
@@ -13,12 +14,26 @@ export default [
     },
     {
         method: 'PUT',
-        path: `${path}/{id}`,
-        handler: funds.addAmmount,
+        path: `${path}/{id}/add`,
+        handler: funds.addAmount,
+        options: {
+            validate: {
+                payload: Joi.object({
+                    amount: Joi.number().min(1).required()
+                })
+            }
+        },
     },
     {
-        method: 'DELETE',
-        path: `${path}/{id}`,
-        handler: funds.removeAmmount
+        method: 'PUT',
+        path: `${path}/{id}/remove`,
+        handler: funds.removeAmount,
+        options: {
+            validate: {
+                payload: Joi.object({
+                    amount: Joi.number().min(1).required()
+                })
+            }
+        }
     }
 ];

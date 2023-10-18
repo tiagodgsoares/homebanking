@@ -1,0 +1,11 @@
+.amount-form {
+    min-width: 100px;
+    max-width: 200px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .amount-full-width {
+    width: 100%;
+  }
