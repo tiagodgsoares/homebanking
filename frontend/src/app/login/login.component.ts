@@ -4,11 +4,11 @@ import { UserService } from '../service/user.service';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class RegisterComponent {
+export class LoginComponent {
 
   constructor(private _formBuilder: FormBuilder, private userService: UserService) { }
 
@@ -27,8 +27,8 @@ export class RegisterComponent {
       newUser.email = this.userFormGroup.value.emailCtrl ? this.userFormGroup.value.emailCtrl : '';
       newUser.password = this.userFormGroup.value.passwordCtrl ? this.userFormGroup.value.passwordCtrl : '';
 
-      this.userService.register(newUser).subscribe(({email}) => {
-        alert(`User ${email} created!`);
+      this.userService.login(newUser).subscribe(({email}) => {
+
         this.userFormGroup.setErrors(null); //TODO not working
         this.userFormGroup.reset();
       });

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Movement } from '../model/movement.interface';
 import { AccountService } from '../service/account.service';
 import { FormControl } from '@angular/forms';
+import { Account } from '../model/account.interface';
 
 @Component({
   selector: 'app-overview',
@@ -12,8 +13,9 @@ import { FormControl } from '@angular/forms';
 export class OverviewComponent implements OnInit {
 
   movementsList: Movement[] = [];
-
   displayedColumns: string[] = ['balance', 'amount', 'date'];
+  amountCtrl = new FormControl();
+  currentBalance: number = 0;
 
   constructor(private accountService: AccountService) { }
 
@@ -21,26 +23,25 @@ export class OverviewComponent implements OnInit {
 
     this.accountService.getAccount('c8a763cb-d2d5-4549-8092-967dff5c1c96').subscribe((account) => {
       this.movementsList = account.movements;
+      this.currentBalance = this.movementsList[this.movementsList.length - 1].balance;
     })
   }
 
-  amountCtrl = new FormControl();
-  
   addAmount() {
-    this.accountService.addAmount('c8a763cb-d2d5-4549-8092-967dff5c1c96', this.amountCtrl.value).subscribe(() => {
-      this.clearForm();
+    this.accountService.addAmount('c8a763cb-d2d5-4549-8092-967dff5c1c96', this.amountCtrl.value).subscribe((account) => {
+      this.onMovementsChange(account); //perceber melhor como funcionam estes subscribe
     });
   }
 
-  removeAmount() { //para fazer o subscribe, tinha de retornar algo e o delete nao retorna nada
-    this.accountService.removeAmount('c8a763cb-d2d5-4549-8092-967dff5c1c96', this.amountCtrl.value).subscribe(() => {
-      this.clearForm();
+  removeAmount() {
+    this.accountService.removeAmount('c8a763cb-d2d5-4549-8092-967dff5c1c96', -this.amountCtrl.value).subscribe((account) => {
+      this.onMovementsChange(account);
     });
   }
-
-  clearForm() {
+  
+  onMovementsChange(account: Account) {
     this.amountCtrl.reset();
-    window.location.reload();
+    this.movementsList = account.movements;
   }
 
 }

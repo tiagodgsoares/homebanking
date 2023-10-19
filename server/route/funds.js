@@ -19,7 +19,7 @@ export default [
         options: {
             validate: {
                 payload: Joi.object({
-                    amount: Joi.number().min(1).required()
+                    amount: Joi.number().min(0.01).required()
                 })
             }
         },
@@ -31,7 +31,7 @@ export default [
         options: {
             validate: {
                 payload: Joi.object({
-                    amount: Joi.number().min(1).required()
+                    amount: Joi.number().max(-0.01).required()
                 })
             }
         }

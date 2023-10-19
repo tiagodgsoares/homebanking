@@ -25,10 +25,8 @@ function addAmount(request, h) {
     const { payload } = request;
     const { params } = request;
 
-    console.log(params)
     const account = Account.getAccount(params.id);
     account.balance += payload.amount;
-    console.log(payload.amount)
 
     /** @type {Movement} */
     const movement = {
@@ -53,12 +51,11 @@ function removeAmount(request, h) {
 
     const { payload } = request;
     const { params } = request;
-
     const account = Account.getAccount(params.id);
 
-    if (account.balance >= payload.amount) {
+    if (account.balance + payload.amount >= 0) {
 
-        account.balance -= payload.amount;
+        account.balance += payload.amount;
 
         /** @type {Movement} */
         const movement = {
@@ -69,9 +66,7 @@ function removeAmount(request, h) {
         }
 
         account.movements.push(movement);
-
         Account.updateAccount(account);
-        console.log(account);
 
         return h.response(account).code(200);
     }

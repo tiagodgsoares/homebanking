@@ -1,1 +1,90 @@
-[{"email":"Tiago","password":"123"},{"email":"Bruno","password":"123"},{"email":"tiago","password":"coisa"},{"email":"bruno","password":"coisa"},{"email":"sofia","password":"coisa"},{"email":"tafd@dsm","password":"dfmds"},{"email":"tsf@afsa","password":"akfn"},{"email":"tafd@adfma","password":"afja"},{"email":"t@g","password":"dfka"},{"email":"t@gt","password":"dfka"},{"email":"afd@sd","password":"sdfd"},{"email":"gjf@sgm","password":"skjgv"},{"email":"tiago@mail.com","password":"porto"}]
+[
+    {
+        "email": "Tiago",
+        "password": "123"
+    },
+    {
+        "email": "Bruno",
+        "password": "123"
+    },
+    {
+        "email": "tiago",
+        "password": "coisa"
+    },
+    {
+        "email": "bruno",
+        "password": "coisa"
+    },
+    {
+        "email": "sofia",
+        "password": "coisa"
+    },
+    {
+        "email": "tafd@dsm",
+        "password": "dfmds"
+    },
+    {
+        "email": "tsf@afsa",
+        "password": "akfn"
+    },
+    {
+        "email": "tafd@adfma",
+        "password": "afja"
+    },
+    {
+        "email": "t@g",
+        "password": "dfka"
+    },
+    {
+        "email": "t@gt",
+        "password": "dfka"
+    },
+    {
+        "email": "afd@sd",
+        "password": "sdfd"
+    },
+    {
+        "email": "gjf@sgm",
+        "password": "skjgv"
+    },
+    {
+        "email": "tiago@mail.com",
+        "password": "porto"
+    },
+    {
+        "email": "tiao@mail.com",
+        "password": "tiago"
+    },
+    {
+        "email": "skjefew@anf.com",
+        "password": "afhna"
+    },
+    {
+        "email": "skjew@anf.com",
+        "password": "afhnaaf"
+    },
+    {
+        "email": "asfjda@afj.com",
+        "password": "ksjf"
+    },
+    {
+        "email": "kdfjb@sfdv.com",
+        "password": "sjdfkj"
+    },
+    {
+        "email": "dasfh@f.com",
+        "password": "sdfs"
+    },
+    {
+        "email": "skdf@gsjg.com",
+        "password": "ahjfd"
+    },
+    {
+        "email": "fmdas@sgm.com",
+        "password": "porto"
+    },
+    {
+        "email": "sgmf@asnj.com",
+        "password": "$2b$10$xVVQ4zMUkEolA7bDw9fFAeqI.X3EqdDhZpJXq4isWlp07PaKR0ttO"
+    }
+]

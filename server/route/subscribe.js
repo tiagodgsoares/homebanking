@@ -10,10 +10,8 @@ export default [
         method: 'POST',
         path: '/subscribe',
         handler: (request, h) => {
-            console.log(request.payload)
             const result = subscribe.register(request.payload);
             return h.response(result).code(200);
-            //como é q passo isto para o controller e retorno na mesma o user no controller?
         },
         options: {
             validate: {
