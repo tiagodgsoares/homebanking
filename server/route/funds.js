@@ -11,6 +11,9 @@ export default [
         method: 'GET',
         path: `${path}/{id}`,
         handler: funds.getBalance,
+        options: {
+            auth: 'jwt'
+        }
     },
     {
         method: 'PUT',
@@ -21,7 +24,8 @@ export default [
                 payload: Joi.object({
                     amount: Joi.number().min(0.01).required()
                 })
-            }
+            },
+            auth: 'jwt'
         },
     },
     {

@@ -23,13 +23,13 @@ export class OverviewComponent implements OnInit {
 
     this.accountService.getAccount('c8a763cb-d2d5-4549-8092-967dff5c1c96').subscribe((account) => {
       this.movementsList = account.movements;
-      this.currentBalance = this.movementsList[this.movementsList.length - 1].balance;
+      this.currentBalance = account.balance;
     })
   }
 
   addAmount() {
     this.accountService.addAmount('c8a763cb-d2d5-4549-8092-967dff5c1c96', this.amountCtrl.value).subscribe((account) => {
-      this.onMovementsChange(account); //perceber melhor como funcionam estes subscribe
+      this.onMovementsChange(account); //TODO perceber melhor como funcionam estes subscribe
     });
   }
 

@@ -1,8 +1,9 @@
 'use strict';
 
 import Hapi from '@hapi/hapi';
-
+import HapiAuthJWT from 'hapi-auth-jwt2';
 import routes from './server/route/index.js';
+import { validateJWT } from './server/controller/login.js'
 
 const init = async () => {
 
@@ -13,6 +14,13 @@ const init = async () => {
             cors: true
         }
     });
+
+    await server.register(HapiAuthJWT);
+    server.auth.strategy('jwt', 'jwt', {
+        key: 'CarlosAlcaraz',
+        validate: validateJWT
+    })
+    server.state('jwt', { isSecure: false })
 
     server.route(routes);
 

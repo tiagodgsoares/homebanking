@@ -2,6 +2,7 @@
 import User from '../persistance/user.js';
 import Account from '../persistance/account.js';
 import Utils from './utils.js';
+import jwt from 'jsonwebtoken';
 
 export default {
     register,
@@ -12,20 +13,30 @@ export default {
  * 
  * @param {User} user - The user to be registered.
  */
-function register(user) {
-    const foundUser = User.getUser(user);
-    
-    if (foundUser) {
-        return 'user already exists';
-    }
-    
-    Account.createAccount(user.email);
-    
-    const encodedPassword = Utils.encodePassword(user.password);
-    user.password = encodedPassword;
-    User.createUser(user);
+function register(request, h) {
 
-    return {
-        ...foundUser,
-        accessToken: sign({ ...foundUser }, 'CarlosAlcaraz') };
+    try {
+
+        const user = request.payload;
+        const foundUser = User.getUser(user);
+
+        if (foundUser) {
+            return h.response({ message: 'User already exists' }).code(400);
+        }
+
+        Account.createAccount(user.email);
+
+        const encodedPassword = Utils.encodePassword(user.password);
+        user.password = encodedPassword;
+        User.createUser(user);
+
+        return h.response({
+            message: `User with email: ${user.email} created successfully!`,
+            accessToken: jwt.sign(user, 'CarlosAlcaraz')
+        }).code(200);
+
+    } catch (error) {
+        console.log(error)
+        return h.response({ message: 'There was a problem with your request' }).code(400);
+    }
 }

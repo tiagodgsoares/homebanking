@@ -20,17 +20,17 @@ export class LoginComponent {
 
   handleSubmit() {
     if (this.userFormGroup.valid) {
-      const newUser: User = {
+      const user: User = {
         email: '',
         password: ''
       }
-      newUser.email = this.userFormGroup.value.emailCtrl ? this.userFormGroup.value.emailCtrl : '';
-      newUser.password = this.userFormGroup.value.passwordCtrl ? this.userFormGroup.value.passwordCtrl : '';
+      user.email = this.userFormGroup.value.emailCtrl ? this.userFormGroup.value.emailCtrl : '';
+      user.password = this.userFormGroup.value.passwordCtrl ? this.userFormGroup.value.passwordCtrl : '';
 
-      this.userService.login(newUser).subscribe(({email}) => {
-
-        this.userFormGroup.setErrors(null); //TODO not working
+      this.userService.login(user).subscribe(() => {
+        this.userFormGroup.setErrors(null);
         this.userFormGroup.reset();
+        //TODO redirect to overview
       });
     }
 

@@ -10,8 +10,7 @@ export default {
  * Get Balance
  */
 function getBalance(request, h) {
-    console.log(request.payload)
-
+    
     const result = Account.getAccount(request.params.id);
 
     return h.response(result).code(200);

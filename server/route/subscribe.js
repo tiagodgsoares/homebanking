@@ -9,10 +9,7 @@ export default [
     {
         method: 'POST',
         path: '/subscribe',
-        handler: (request, h) => {
-            const result = subscribe.register(request.payload);
-            return h.response(result).code(200);
-        },
+        handler: subscribe.register,
         options: {
             validate: {
                 payload: Joi.object({

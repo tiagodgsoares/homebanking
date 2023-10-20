@@ -29,8 +29,9 @@ export class RegisterComponent {
 
       this.userService.register(newUser).subscribe(({email}) => {
         alert(`User ${email} created!`);
-        this.userFormGroup.setErrors(null); //TODO not working
+        this.userFormGroup.setErrors(null);
         this.userFormGroup.reset();
+        //TODO redirect to overview
       });
     }
 
