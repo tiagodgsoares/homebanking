@@ -4,18 +4,28 @@ import utils from './utils.js';
 import {v4} from 'uuid';
 
 export default {
-    getAccount,
+    getAccountById,
+    getAccountByEmail,
     createAccount,
     updateAccount
 }
 
 /**
- * Get Account
+ * Get Account by ID
  *
  * @returns {Account} 
  */
-function getAccount(id) {
+function getAccountById(id) {
     return Accounts.find((account) => (account.id === id));
+}
+
+/**
+ * Get Account by email
+ *
+ * @returns {Account} 
+ */
+function getAccountByEmail(email) {
+    return Accounts.find((account) => (account.userEmail === email));
 }
 
 /**

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { User } from '../model/user.interface';
 import { UserService } from '../service/user.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginComponent {
 
-  constructor(private _formBuilder: FormBuilder, private userService: UserService) { }
+  constructor(private _formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
 
   userFormGroup = this._formBuilder.group({
     emailCtrl: ['', [Validators.required, Validators.email]],
@@ -27,13 +28,21 @@ export class LoginComponent {
       user.email = this.userFormGroup.value.emailCtrl ? this.userFormGroup.value.emailCtrl : '';
       user.password = this.userFormGroup.value.passwordCtrl ? this.userFormGroup.value.passwordCtrl : '';
 
-      this.userService.login(user).subscribe(() => {
-        this.userFormGroup.setErrors(null);
-        this.userFormGroup.reset();
-        //TODO redirect to overview
+      this.userService.login(user).subscribe({
+        next: ({ message, accountId }) => {
+          alert(message);
+          this.userFormGroup.setErrors(null);
+          this.userFormGroup.reset();
+          this.router.navigate(['overview', accountId]);
+        },
+        error: (error) => {
+          if (error.status === 400) {
+            alert(error.error.message);
+          }
+        }
       });
-    }
 
+    };
   }
 
 }

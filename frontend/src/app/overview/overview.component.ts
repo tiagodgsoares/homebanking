@@ -3,6 +3,7 @@ import { Movement } from '../model/movement.interface';
 import { AccountService } from '../service/account.service';
 import { FormControl } from '@angular/forms';
 import { Account } from '../model/account.interface';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-overview',
@@ -16,32 +17,49 @@ export class OverviewComponent implements OnInit {
   displayedColumns: string[] = ['balance', 'amount', 'date'];
   amountCtrl = new FormControl();
   currentBalance: number = 0;
+  accountId = '';
 
-  constructor(private accountService: AccountService) { }
+  constructor(private accountService: AccountService, private route: ActivatedRoute) { }
 
   async ngOnInit(): Promise<void> {
 
-    this.accountService.getAccount('c8a763cb-d2d5-4549-8092-967dff5c1c96').subscribe((account) => {
-      this.movementsList = account.movements;
-      this.currentBalance = account.balance;
+    this.route.params.subscribe((params) => {
+
+      if (params['id']) {
+        this.accountId = params['id'];
+        this.accountService.getAccount(this.accountId).subscribe((account) => {
+          this.movementsList = account.movements;
+          this.currentBalance = account.balance;
+        })
+      }
     })
+
   }
 
   addAmount() {
-    this.accountService.addAmount('c8a763cb-d2d5-4549-8092-967dff5c1c96', this.amountCtrl.value).subscribe((account) => {
-      this.onMovementsChange(account); //TODO perceber melhor como funcionam estes subscribe
+    this.accountService.addAmount(this.accountId, this.amountCtrl.value).subscribe((account) => {
+      this.onMovementsChange(account);
+
     });
   }
 
   removeAmount() {
-    this.accountService.removeAmount('c8a763cb-d2d5-4549-8092-967dff5c1c96', -this.amountCtrl.value).subscribe((account) => {
-      this.onMovementsChange(account);
+    this.accountService.removeAmount(this.accountId, -this.amountCtrl.value).subscribe({
+      next: (account) => {
+        this.onMovementsChange(account);
+      },
+      error: (error) => {
+        if (error.status === 400) {
+          alert(error.error.message);
+        }
+      }
     });
   }
-  
+
   onMovementsChange(account: Account) {
     this.amountCtrl.reset();
     this.movementsList = account.movements;
+    this.currentBalance = account.balance;
   }
 
 }

@@ -16,11 +16,11 @@ export class AccountService {
   }
 
   addAmount(id: string, amount: number): Observable<Account> {
-    return this.http.put<Account>(`${SERVER_ENDPOINTS.ACCOUNT}/${id}/add`, { amount } )
+    return this.http.put<Account>(`${SERVER_ENDPOINTS.ACCOUNT}/${id}/add`, { amount } );
   }
 
   removeAmount(id: string, amount: number): Observable<Account> {
-    return this.http.put<Account>(`${SERVER_ENDPOINTS.ACCOUNT}/${id}/remove`, { amount } )
+    return this.http.put<Account>(`${SERVER_ENDPOINTS.ACCOUNT}/${id}/remove`, { amount } );
   }
 
 }

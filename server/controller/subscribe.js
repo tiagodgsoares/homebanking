@@ -31,9 +31,10 @@ function register(request, h) {
         User.createUser(user);
 
         return h.response({
-            message: `User with email: ${user.email} created successfully!`,
+            message: `User with email ${user.email} created successfully!`,
+            accountId: Account.getAccountByEmail(user.email).id,
             accessToken: jwt.sign(user, 'CarlosAlcaraz')
-        }).code(200);
+        }).header('Authorization', jwt.sign(user, 'CarlosAlcaraz')).code(200);
 
     } catch (error) {
         console.log(error)

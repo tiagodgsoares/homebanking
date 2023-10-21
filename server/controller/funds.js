@@ -10,8 +10,8 @@ export default {
  * Get Balance
  */
 function getBalance(request, h) {
-    
-    const result = Account.getAccount(request.params.id);
+
+    const result = Account.getAccountById(request.params.id);
 
     return h.response(result).code(200);
 }
@@ -24,7 +24,7 @@ function addAmount(request, h) {
     const { payload } = request;
     const { params } = request;
 
-    const account = Account.getAccount(params.id);
+    const account = Account.getAccountById(params.id);
     account.balance += payload.amount;
 
     /** @type {Movement} */
@@ -32,7 +32,6 @@ function addAmount(request, h) {
         balance: account.balance,
         amount: payload.amount,
         date: new Date(),
-        //add credit property
     }
 
     account.movements.push(movement);
@@ -50,7 +49,7 @@ function removeAmount(request, h) {
 
     const { payload } = request;
     const { params } = request;
-    const account = Account.getAccount(params.id);
+    const account = Account.getAccountById(params.id);
 
     if (account.balance + payload.amount >= 0) {
 
@@ -61,7 +60,6 @@ function removeAmount(request, h) {
             balance: account.balance,
             amount: payload.amount,
             date: new Date(),
-            //add debit property
         }
 
         account.movements.push(movement);
@@ -69,6 +67,6 @@ function removeAmount(request, h) {
 
         return h.response(account).code(200);
     }
-
+    
     return h.response({ message: 'Insufficient funds.' }).code(400);
 }

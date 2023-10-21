@@ -1,5 +1,6 @@
 
 import User from '../persistance/user.js';
+import Account from '../persistance/account.js';
 import Utils from './utils.js';
 import jwt from 'jsonwebtoken';
 
@@ -9,9 +10,9 @@ export default {
 }
 
 /**
- * Registers a new user.
+ * Logins a registered user.
  * 
- * @param {User} user - The user to be registered.
+ * @param {User} user - The user to be logged in.
  */
 export function authenticate(request, h) {
 
@@ -20,11 +21,13 @@ export function authenticate(request, h) {
 
     if (foundUser && Utils.comparePasswords(user.password, foundUser.password)) {
         return h.response({
-            message: 'Login successful'
-        }).state('jwt', {jwt: jwt.sign(foundUser, 'CarlosAlcaraz')}, { encoding: 'none'}).code(200);
+            message: 'Login successful',
+            accountId: Account.getAccountByEmail(user.email).id,
+            accessToken: jwt.sign(user, 'CarlosAlcaraz')
+        }).header('Authorization', jwt.sign(foundUser, 'CarlosAlcaraz')).code(200);
     }
 
-    return null;
+    return h.response({ message: 'Invalid Email or password.' }).code(400);
 }
 
 export function validateJWT(decoded) {
