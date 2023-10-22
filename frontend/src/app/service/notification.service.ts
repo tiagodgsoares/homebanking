@@ -11,7 +11,7 @@ export class NotificationService {
   constructor(private snackBar: MatSnackBar) { }
 
   /**
-   * Triggers a success notification.
+   * Triggers a notification using Materials Snack Bar to show our costum NotificationComponent.
    *
    * @param options - The notification configuration.
    * @param displayTitle - The title to display in the notification.
