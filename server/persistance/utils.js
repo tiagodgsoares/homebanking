@@ -6,11 +6,13 @@ export default {
     readJSONFile,
 }
 
-const MODEL_PATH = '/server/model/'
+const MODEL_PATH = '/server/model/';
 
 /**
- * 
- * @param {object} data 
+ * Saves data to a system file. 
+ *
+ * @param {string} filePath - The file name to save.
+ * @param {object} data     - The data to be saved.
  */
 function saveJSONFile(filePath, data) {
 
@@ -21,9 +23,10 @@ function saveJSONFile(filePath, data) {
 }
 
 /**
+ * Reads a system file.
  * 
- * @param {string} path 
+ * @param {string} filePath - The file name to read.
  */
-function readJSONFile(path) {
-    return fs.readFileSync(path);
+function readJSONFile(filePath) {
+    return fs.readFileSync(`./server/model/${filePath}`);
 }

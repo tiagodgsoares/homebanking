@@ -1,12 +1,13 @@
 
 import utils from './utils.js';
-import Users from '../model/user.json' assert { type: 'json' };
+
+const Users =  JSON.parse(utils.readJSONFile('user.json'));
 
 export default {
     getUser,
     createUser,
-    updateUser
 }
+
 
 /**
  * Get User
@@ -23,15 +24,4 @@ function getUser(userToFind) {
 function createUser(user) {
     Users.push(user);
     utils.saveJSONFile('user.json', JSON.stringify(Users));
-}
-
-/**
- * Update User
- */
-function updateUser(user) {
-
-}
-
-function save(users) {
-    utils.saveJSONFile('user.json', users);
 }

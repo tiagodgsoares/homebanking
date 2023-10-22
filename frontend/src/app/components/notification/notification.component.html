@@ -1,0 +1,9 @@
+<div class="title-style" *ngIf="data?.title">
+    {{data.title | titlecase}}
+</div>
+<div class="content-style">
+    {{data.message}}
+</div>
+<div *ngIf="data?.buttonText">
+    <button mat-flat-button (click)="snackBarRef.dismiss()">{{data.buttonText}}</button>
+</div>

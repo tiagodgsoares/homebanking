@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { User } from '../model/user.interface';
-import { UserService } from '../service/user.service';
+import { User } from '../../model/user.interface';
+import { UserService } from '../../service/user.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/service/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
 
-  constructor(private _formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
+  constructor(private _formBuilder: FormBuilder, private userService: UserService, private router: Router, private notificationService: NotificationService) { }
 
   userFormGroup = this._formBuilder.group({
     emailCtrl: ['', [Validators.required, Validators.email]],
@@ -29,8 +30,15 @@ export class RegisterComponent {
       newUser.password = this.userFormGroup.value.passwordCtrl ? this.userFormGroup.value.passwordCtrl : '';
 
       this.userService.register(newUser).subscribe(({message, accountId}) => {
-        alert(message);
-        this.userFormGroup.setErrors(null);
+        this.notificationService.notify(
+          {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+          },
+          message,
+          'success',
+        );        this.userFormGroup.setErrors(null);
         this.userFormGroup.reset();
         this.router.navigate(['overview', accountId]);
       });

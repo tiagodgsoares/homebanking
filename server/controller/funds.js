@@ -2,8 +2,8 @@ import Account from '../persistance/account.js';
 
 export default {
     getBalance,
-    addAmount: addAmount,
-    removeAmount: removeAmount
+    addAmount,
+    removeAmount
 }
 
 /**

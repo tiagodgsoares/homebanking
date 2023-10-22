@@ -1,7 +1,8 @@
 
-import Accounts from '../model/account.json' assert { type: 'json' };
 import utils from './utils.js';
 import {v4} from 'uuid';
+
+const Accounts =  JSON.parse(utils.readJSONFile('account.json'));
 
 export default {
     getAccountById,
@@ -9,6 +10,7 @@ export default {
     createAccount,
     updateAccount
 }
+
 
 /**
  * Get Account by ID
@@ -44,7 +46,6 @@ function createAccount(userEmail) {
 
     Accounts.push(account);
     utils.saveJSONFile('account.json', JSON.stringify(Accounts)); // variable for .json
-
 }
 
 /**
@@ -57,7 +58,4 @@ function updateAccount(account) {
         Accounts[accountIndex] = account;
         utils.saveJSONFile('account.json', JSON.stringify(Accounts));
     }
-    
 }
-
-

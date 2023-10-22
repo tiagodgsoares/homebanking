@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Movement } from '../model/movement.interface';
-import { AccountService } from '../service/account.service';
+import { Movement } from '../../model/movement.interface';
+import { AccountService } from '../../service/account.service';
 import { FormControl } from '@angular/forms';
-import { Account } from '../model/account.interface';
+import { Account } from '../../model/account.interface';
 import { ActivatedRoute } from '@angular/router';
+import { NotificationService } from 'src/app/service/notification.service';
 
 @Component({
   selector: 'app-overview',
@@ -19,7 +20,7 @@ export class OverviewComponent implements OnInit {
   currentBalance: number = 0;
   accountId = '';
 
-  constructor(private accountService: AccountService, private route: ActivatedRoute) { }
+  constructor(private accountService: AccountService, private route: ActivatedRoute, private notificationService: NotificationService) { }
 
   async ngOnInit(): Promise<void> {
 
@@ -50,7 +51,15 @@ export class OverviewComponent implements OnInit {
       },
       error: (error) => {
         if (error.status === 400) {
-          alert(error.error.message);
+          this.notificationService.notify(
+            {
+              duration: 3000,
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+            },
+            error.error.message,
+            'success',
+          );
         }
       }
     });
