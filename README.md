@@ -4,12 +4,15 @@ This HomeBanking system is a secure and user-friendly web application designed f
 
 ## **Frontend Technologies:**
 
-**Angular:** https://angular.io/  
-**Angular Material:** https://material.angular.io/  
+Angular: https://angular.io/  
+Angular Material: https://material.angular.io/  
+TypeScript  
 
 ## **Backend Technologies:**
 
+Node.js  
 Hapi Framework: https://hapi.dev/  
+Joi for validation: https://joi.dev/  
 
 ## **Key Features:**
 
